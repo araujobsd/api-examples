@@ -14,6 +14,7 @@ apikey = sys.argv[1]
 # You must authenticate yourself by passing
 # the API key as the first method's argument
 version = api.version.info(apikey)
+print "gandi api version:" + version
 
 # Count your Gandi Sites
 
