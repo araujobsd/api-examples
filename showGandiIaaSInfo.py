@@ -16,7 +16,7 @@ apikey = sys.argv[1]
 version = api.version.info(apikey)
 print "gandi api version:" + str(version)
 
-# Count your Gandi PaaS instances
+# Count your Gandi IaaSs 
 
 GandiIaaSNums = api.hosting.vm.count(apikey)
 
@@ -25,7 +25,7 @@ if GandiIaaSNums > 1:
     gandiiaas_count_msg += "s"
 print gandiiaas_count_msg
 
-# Get all site id 
+# Get all IaaS id 
 iaasid_list = []
 for eachsite in api.hosting.vm.list(apikey):
     for k,v in eachsite.items():
@@ -33,7 +33,7 @@ for eachsite in api.hosting.vm.list(apikey):
             iaasid_list.append(v)
 print "Gandi IaaS IDs:", iaasid_list
 
-#Get info on each Gandi site
+#Get info on each IaaSs
 if len(iaasid_list) > 0:
     for iaasid in iaasid_list:
         print api.hosting.vm.info(apikey, iaasid)
