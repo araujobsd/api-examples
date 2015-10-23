@@ -1,41 +1,45 @@
+"""
+The sample code is to show info of your Gandi IaaSs with API key.
+"""
+
 import xmlrpclib
 import sys
 
-# Connect to the API server
-api = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
+#  Connect to the API server
+API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
 if len(sys.argv) != 2:
     print "%s %s" % (sys.argv[0], "<YOUR API KEY>")
     exit(1)
 
-apikey = sys.argv[1]
+APIKEY = sys.argv[1]
 
-# Now you can call API methods.
-# You must authenticate yourself by passing
-# the API key as the first method's argument
-version = api.version.info(apikey)
-print "gandi api version:" + version['api_version']
+#  Now you can call API methods.
+#  You must authenticate yourself by passing
+#  the API key as the first method's argument
+VERSION = API.version.info(APIKEY)
+print "gandi api version:" + VERSION['api_version']
 
-# Count your Gandi IaaSs 
+#  Count your Gandi IaaSs
 
-GandiIaaSNums = api.hosting.vm.count(apikey)
+GANDIIAASNUMS = API.hosting.vm.count(APIKEY)
 
-gandiiaas_count_msg = "You have %s Gandi IaaS Instance" % GandiIaaSNums
-if GandiIaaSNums > 1:
-    gandiiaas_count_msg += "s"
-print gandiiaas_count_msg
+GANDIIAAS_COUNT_MSG = "You have %s Gandi IaaS Instance" % GANDIIAASNUMS
+if GANDIIAASNUMS > 1:
+    GANDIIAAS_COUNT_MSG += "s"
+print GANDIIAAS_COUNT_MSG
 
-# Get all IaaS id 
-iaasid_list = []
-for eachiaas in api.hosting.vm.list(apikey):
-    iaasid_list.append(eachiaas['id'])
+#  Get all IaaS id
+IAASID_LIST = []
+for eachiaas in API.hosting.vm.list(APIKEY):
+    IAASID_LIST.append(eachiaas['id'])
 
-print "Gandi IaaS IDs:", iaasid_list
+print "Gandi IaaS IDs:", IAASID_LIST
 
-#Get info on each IaaSs
-if len(iaasid_list) > 0:
-    for iaasid in iaasid_list:
-        print api.hosting.vm.info(apikey, iaasid)
-        print 
+#  Get info on each IaaSs
+if len(IAASID_LIST) > 0:
+    for iaasid in IAASID_LIST:
+        print API.hosting.vm.info(APIKEY, iaasid)
+        print
 
 

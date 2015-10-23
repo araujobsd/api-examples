@@ -1,5 +1,5 @@
 """
-The sample code is to show info of your Gandi Site with API key.
+The sample code is to show info of your Gandi PaaS instances with API key.
 """
 
 import xmlrpclib
