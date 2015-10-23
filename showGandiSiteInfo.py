@@ -4,6 +4,10 @@ import sys
 # Connect to the API server
 api = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
+if len(sys.argv) != 2:
+    print "%s %s" % (sys.argv[0], "<YOUR API KEY>")
+    exit(1)
+
 apikey = sys.argv[1]
 
 # Now you can call API methods.
