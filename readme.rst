@@ -33,5 +33,3 @@ API List
 - Gandi Security API
 - Gandi Site API
 - Site API
-- 
-- 
