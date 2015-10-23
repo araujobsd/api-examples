@@ -28,9 +28,8 @@ print gandisite_count_msg
 # Get all site id 
 siteid_list = []
 for eachsite in api.site.list(apikey):
-    for k,v in eachsite.items():
-        if k == "id":
-            siteid_list.append(v)
+    siteid_list.append(eachsite['id'])
+
 print "Gandi Site IDs:", siteid_list
 
 #Get info on each Gandi site
