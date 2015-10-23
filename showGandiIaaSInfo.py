@@ -14,7 +14,7 @@ apikey = sys.argv[1]
 # You must authenticate yourself by passing
 # the API key as the first method's argument
 version = api.version.info(apikey)
-print "gandi api version:" + str(version)
+print "gandi api version:" + version['api_version']
 
 # Count your Gandi IaaSs 
 
@@ -27,10 +27,9 @@ print gandiiaas_count_msg
 
 # Get all IaaS id 
 iaasid_list = []
-for eachsite in api.hosting.vm.list(apikey):
-    for k,v in eachsite.items():
-        if k == "id":
-            iaasid_list.append(v)
+for eachiaas in api.hosting.vm.list(apikey):
+    iaasid_list.append(eachiaas['id'])
+
 print "Gandi IaaS IDs:", iaasid_list
 
 #Get info on each IaaSs

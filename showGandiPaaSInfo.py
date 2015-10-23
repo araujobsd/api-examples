@@ -27,10 +27,9 @@ print gandipaas_count_msg
 
 # Get all site id 
 paasid_list = []
-for eachsite in api.paas.list(apikey):
-    for k,v in eachsite.items():
-        if k == "id":
-            paasid_list.append(v)
+for eachpaas in api.paas.list(apikey):
+    paasid_list.append(eachpaas['id'])
+
 print "Gandi PaaS IDs:", paasid_list
 
 #Get info on each Gandi site
