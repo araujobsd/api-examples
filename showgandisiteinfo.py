@@ -1,41 +1,43 @@
+"""
+The sample code is to show info of your Gandi Site with API key.
+"""
+
 import xmlrpclib
 import sys
 
 # Connect to the API server
-api = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
+API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
 if len(sys.argv) != 2:
     print "%s %s" % (sys.argv[0], "<YOUR API KEY>")
     exit(1)
 
-apikey = sys.argv[1]
+APIKEY = sys.argv[1]
 
 # Now you can call API methods.
 # You must authenticate yourself by passing
 # the API key as the first method's argument
-version = api.version.info(apikey)
-print "gandi api version: " + version['api_version']
+VERSION = API.version.info(APIKEY)
+print "gandi api version: " + VERSION['api_version']
 
 # Count your Gandi Sites
 
-GandiSitesNums = api.site.count(apikey)
+GANDISITESNUMS = API.site.count(APIKEY)
 
-gandisite_count_msg = "You have %s Gandi Site" % GandiSitesNums
-if GandiSitesNums > 1:
-    gandisite_count_msg += "s"
-print gandisite_count_msg
+GANDISITE_COUNT_MSG = "You have %s Gandi Site" % GANDISITESNUMS
+if GANDISITESNUMS > 1:
+    GANDISITE_COUNT_MSG += "s"
+print GANDISITE_COUNT_MSG
 
-# Get all site id 
-siteid_list = []
-for eachsite in api.site.list(apikey):
-    siteid_list.append(eachsite['id'])
+#  Get all site id
+SITEID_LIST = []
+for eachsite in API.site.list(APIKEY):
+    SITEID_LIST.append(eachsite['id'])
 
-print "Gandi Site IDs:", siteid_list
+print "Gandi Site IDs:", SITEID_LIST
 
-#Get info on each Gandi site
-if len(siteid_list) > 0:
-    for siteid in siteid_list:
-        print api.site.info(apikey, siteid)
-        print 
-
-
+#  Get info on each Gandi site
+if len(SITEID_LIST) > 0:
+    for siteid in SITEID_LIST:
+        print API.site.info(APIKEY, siteid)
+        print
