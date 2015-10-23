@@ -1,41 +1,43 @@
+"""
+The sample code is to show info of your Gandi Site with API key.
+"""
+
 import xmlrpclib
 import sys
 
-# Connect to the API server
-api = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
+#  Connect to the API server
+API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
 if len(sys.argv) != 2:
     print "%s %s" % (sys.argv[0], "<YOUR API KEY>")
     exit(1)
 
-apikey = sys.argv[1]
+APIKEY = sys.argv[1]
 
-# Now you can call API methods.
-# You must authenticate yourself by passing
-# the API key as the first method's argument
-version = api.version.info(apikey)
-print "gandi api version: " + version['api_version']
+#  Now you can call API methods.
+#  You must authenticate yourself by passing
+#  the API key as the first method's argument
+VERSION = API.version.info(APIKEY)
+print "gandi api version: " + VERSION['api_version']
 
-# Count your Gandi PaaS instances
+#  Count your Gandi PaaS instances
 
-GandiPaaSNums = api.paas.count(apikey)
+GANDIPAASNUMS = API.paas.count(APIKEY)
 
-gandipaas_count_msg = "You have %s Gandi PaaS Instance" % GandiPaaSNums
-if GandiPaaSNums > 1:
-    gandipaas_count_msg += "s"
-print gandipaas_count_msg
+GANDIPAAS_COUNT_MSG = "You have %s Gandi PaaS Instance" % GANDIPAASNUMS
+if GANDIPAASNUMS > 1:
+    GANDIPAAS_COUNT_MSG += "s"
+print GANDIPAAS_COUNT_MSG
 
-# Get all site id 
-paasid_list = []
-for eachpaas in api.paas.list(apikey):
-    paasid_list.append(eachpaas['id'])
+#  Get all site id
+PAASID_LIST = []
+for eachpaas in API.paas.list(APIKEY):
+    PAASID_LIST.append(eachpaas['id'])
 
-print "Gandi PaaS IDs:", paasid_list
+print "Gandi PaaS IDs:", PAASID_LIST
 
-#Get info on each Gandi site
-if len(paasid_list) > 0:
-    for paasid in paasid_list:
-        print api.paas.info(apikey, paasid)
-        print 
-
-
+#  Get info on each Gandi site
+if len(PAASID_LIST) > 0:
+    for paasid in PAASID_LIST:
+        print API.paas.info(APIKEY, paasid)
+        print
