@@ -4,6 +4,7 @@ The sample code is to show info of your Gandi Site with API key.
 
 import xmlrpclib
 import sys
+from pprint import pprint
 
 # Connect to the API server
 API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
@@ -28,7 +29,12 @@ for eachcontact in API.contact.list(APIKEY):
 print "Gandi Site IDs:", HANDLE_LIST
 
 #  Get info on each Gandi handle
+"""
 if len(HANDLE_LIST) > 0:
     for contactid in HANDLE_LIST:
         print API.contact.info(APIKEY, contactid)
         print
+"""
+
+if len(HANDLE_LIST) > 0:
+    pprint (API.contact.list(APIKEY))

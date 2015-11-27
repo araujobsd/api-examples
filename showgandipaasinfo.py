@@ -37,7 +37,7 @@ for eachpaas in API.paas.list(APIKEY):
 print "Gandi PaaS IDs:", PAASID_LIST
 
 #  Get info on each Gandi site
+
 if len(PAASID_LIST) > 0:
-    for paasid in PAASID_LIST:
-        print API.paas.info(APIKEY, paasid)
-        print
+    pprint (API.paas.list(APIKEY))
+
