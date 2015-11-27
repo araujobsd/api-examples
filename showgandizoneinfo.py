@@ -4,6 +4,7 @@ The sample code is to show info of your Gandi PaaS instances with API key.
 
 import xmlrpclib
 import sys
+from pprint import pprint
 
 #  Connect to the API server
 API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
@@ -26,5 +27,5 @@ GANDIZONES = API.domain.zone.list(APIKEY)
 
 GANDIZONE_MSG = "ZONE INFOMATION"
 print GANDIZONE_MSG 
-print GANDIZONES
+pprint(GANDIZONES)
 
