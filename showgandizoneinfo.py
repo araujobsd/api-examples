@@ -21,7 +21,7 @@ APIKEY = sys.argv[1]
 VERSION = API.version.info(APIKEY)
 print "gandi api version: " + VERSION['api_version']
 
-#  Count your Gandi PaaS instances
+# list the zones you have access to 
 
 GANDIZONES = API.domain.zone.list(APIKEY)
 
