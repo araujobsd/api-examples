@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """
-The sample code is to show info of your Gandi zone file info with API key
 此範例程式碼用途為透過API金鑰，取得Gandi區域檔的相關資訊
 """
 
@@ -19,9 +18,6 @@ if len(sys.argv) != 2:
 
 APIKEY = sys.argv[1]
 
-#  Now you can call API methods.
-#  You must authenticate yourself by passing
-#  the API key as the first method's argument
 #  您可以呼叫API方法
 #  您必須經由API金鑰作為第一個方法的參數進行驗證
 VERSION = API.version.info(APIKEY)
