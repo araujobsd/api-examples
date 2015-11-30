@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """
-The sample code is to show info of your Gandi Site with API key.
 此範例程式碼用途為透過API金鑰，取得Gandi Site相關資訊
 """
 
@@ -18,15 +17,11 @@ if len(sys.argv) != 2:
 
 APIKEY = sys.argv[1]
 
-# Now you can call API methods.
-# You must authenticate yourself by passing
-# the API key as the first method's argument
 #  您可以呼叫API方法
 #  您必須經由API金鑰作為第一個方法的參數進行驗證
 VERSION = API.version.info(APIKEY)
 print "gandi api version: " + VERSION['api_version']
 
-# Count your Gandi Sites
 # 計算Gandi Site的數量
 GANDISITESNUMS = API.site.count(APIKEY)
 
