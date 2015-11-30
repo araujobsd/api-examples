@@ -1,49 +1,62 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-此範例程式碼用途為透過API金鑰，取得Gandi SSL憑證相關資訊
-"""
+#
+#  The sample code is to show info of your Gandi SSL certificates with api key.
+#  此範例程式碼用途為透過api金鑰，取得Gandi SSL憑證相關資訊
+#
+
+'''
+API INFO: http://doc.rpc.gandi.net/
+'''
 
 import xmlrpclib
-import sys
-from pprint import pprint
 
-#  Connect to the API server
-#  連接API伺服器
-API = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
-if len(sys.argv) != 2:
-    print "%s %s" % (sys.argv[0], "<YOUR API KEY>")
-    exit(1)
+def show_cert_info(api_key):
+    '''
+        Receive the API_KEY and output the SSL status per domain.
+    '''
 
-APIKEY = sys.argv[1]
+    #  Connect to the api server
+    #  連接api伺服器
+    api = xmlrpclib.ServerProxy('https://rpc.gandi.net/xmlrpc/')
 
-# Now you can call API methods.
-# You must authenticate yourself by passing
-# the API key as the first method's argument
-#  您可以呼叫API方法
-#  您必須經由API金鑰作為第一個方法的參數進行驗證
-VERSION = API.version.info(APIKEY)
-print "gandi api version: " + VERSION['api_version']
+    #  Now you can call api methods.
+    #  You must authenticate yourself by passing
+    #  the api key as the first method's argument
+    #  您可以呼叫api方法
+    #  您必須經由api金鑰作為第一個方法的參數進行驗證
+    version = api.version.info(api_key)['api_version']
+    print "Gandi api version: %s" % (version)
 
-# Count your Gandi certs
-# 計算Gandi憑證的數量
-GANDISITESNUMS = API.cert.count(APIKEY)
+    #  Count your Gandi certs
+    #  計算Gandi憑證的數量
+    gandi_cert_nums = api.cert.count(api_key)
 
-GANDISITE_COUNT_MSG = "You have %s certificate" % GANDISITESNUMS
-if GANDISITESNUMS > 1:
-    GANDISITE_COUNT_MSG += "s"
-print GANDISITE_COUNT_MSG
+    gandi_cert_count_msg = "You have %s certificate" % (gandi_cert_nums)
+    if gandi_cert_nums > 1:
+        gandi_cert_count_msg += "s"
+    print gandi_cert_count_msg
 
-#  Get all certs
-#  取得所有憑證
-CERT_LIST = []
-for eachsite in API.cert.list(APIKEY):
-    CERT_LIST.append(eachsite['id'])
+    #  Get all certs
+    #  取得所有憑證
+    cert_list = []
+    for eachsite in api.cert.list(api_key):
+        cert_list.append(eachsite['id'])
+    if len(cert_list) > 0:
+        print "Gandi CERT IDs: %s" % (cert_list)
 
-print "Gandi CERT IDs:", CERT_LIST
+    #  Get info on each Gandi certs
+    #  取得各個Gandi憑證的相關資訊
+    if len(cert_list) > 0:
+        for item in api.cert.list(api_key):
+            print "Domain: %s with SSL status: %s" % (
+                item['cn'], item['status'])
 
-#  Get info on each Gandi certs
-#  取得各個Gandi憑證的相關資訊
 
-if len(CERT_LIST) > 0:
-    pprint(API.cert.list(APIKEY))
+if __name__ == '__main__':
+    API_KEY = raw_input("Enter <YOUR API KEY>: ")
+    if len(API_KEY) < 24:
+        print "<YOUR API KEY> must have 24 characters"
+    else:
+        show_cert_info(API_KEY)
