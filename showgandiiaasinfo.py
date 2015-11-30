@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 """
-The sample code is to show info of your Gandi IaaSs with API key.
 此範例程式碼用途為透過API金鑰，取得Gandi IaaS相關資訊
 """
 
@@ -19,9 +18,6 @@ if len(sys.argv) != 2:
 
 APIKEY = sys.argv[1]
 
-#  Now you can call API methods.
-#  You must authenticate yourself by passing
-#  the API key as the first method's argument
 #  您可以呼叫API方法
 #  您必須經由API金鑰作為第一個方法的參數進行驗證
 VERSION = API.version.info(APIKEY)
@@ -37,7 +33,6 @@ if GANDIIAASNUMS > 1:
     GANDIIAAS_COUNT_MSG += "s"
 print GANDIIAAS_COUNT_MSG
 
-#  Get all IaaS id
 #  取得全部的IaaS編號
 IAASID_LIST = []
 for eachiaas in API.hosting.vm.list(APIKEY):
@@ -45,7 +40,6 @@ for eachiaas in API.hosting.vm.list(APIKEY):
 
 print "Gandi IaaS IDs:", IAASID_LIST
 
-#  Get info on each IaaSs
 #  取得個別的IaaS資訊內容
 
 if len(IAASID_LIST) > 0:
