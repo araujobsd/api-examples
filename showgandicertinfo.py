@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-The sample code is to show info of your Gandi SSL certificates with API key.
 此範例程式碼用途為透過API金鑰，取得Gandi SSL憑證相關資訊
 """
 
