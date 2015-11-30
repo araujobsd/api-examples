@@ -25,7 +25,7 @@ print "gandi api version: " + VERSION['api_version']
 #  計算Gandi Paas 實體的數量
 GANDIPAASNUMS = API.paas.count(APIKEY)
 
-GANDIPAAS_COUNT_MSG = "You have %s Gandi PaaS Instance" % GANDIPAASNUMS
+GANDIPAAS_COUNT_MSG = "You have %s Gandi PaaS instances" % GANDIPAASNUMS
 if GANDIPAASNUMS > 1:
     GANDIPAAS_COUNT_MSG += "s"
 print GANDIPAAS_COUNT_MSG
